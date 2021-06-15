@@ -1,0 +1,15 @@
+{% extends 'publications/base.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+    <p>{{ post.time_create }}</p>
+    <button class="button" ><a href="#">{{ post.author }}</a></button>
+
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{ post.photo.url }}"></p>
+{% endif %}
+
+{{ post.content|linebreaksbr }}
+    <button class="table-page"><a href="#">Читать комментарии</a></button>
+{% endblock %}
