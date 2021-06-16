@@ -1,0 +1,20 @@
+{% extends 'publications/base.html' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for atl in posts_athlete %}
+            <li><div class="article-panel">
+                <p class="first">{{ atl.first_name }}||{{ atl.last_name }}</p>
+            </div>
+                {% if atl.photo %}
+                <p><img class="img-article-left thumb" src="{{ atl.photo.url }}"></p>
+                {% endif %}
+                <p>{{ atl.type_sports }}</p>
+                <div class="clear"></div>
+                <p class="link-read-post"><a href=#>Подробнее</a></p>
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
