@@ -1,0 +1,16 @@
+{% extends 'publications/base.html' %}
+
+{% block content %}
+<h1>{{ article_about_author.title }}</h1>
+    <p>{{ article_about_author.first_name }}||{{ article_about_author.last_name }}</p>
+    <p>{{ article_about_author.position }}</p>
+
+
+
+{% if article_about_author.photo %}
+<p><img class="img-article-left" src="{{ article_about_author.photo.url }}"></p>
+{% endif %}
+
+{{ article_about_author.summary|linebreaksbr }}
+
+{% endblock %}

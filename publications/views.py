@@ -1,6 +1,6 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
@@ -38,6 +38,19 @@ def about_authors(request):
     }
 
     return render(request, 'publications/info_about_authors.html', context=context)
+
+
+def show_article_about_author(request, author_id):
+    article_about_author = get_object_or_404(Author, id=author_id)
+
+    context = {
+        'article_about_author': article_about_author,
+        'menu': menu,
+        'title': article_about_author.summary,
+
+    }
+
+    return render(request, 'publications/article_about_author.html', context=context)
 
 
 def about_athlete(request):

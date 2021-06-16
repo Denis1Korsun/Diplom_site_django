@@ -12,7 +12,7 @@
                 {% endif %}
                 <p>{{ a.position }}</p>
                 <div class="clear"></div>
-                <p class="link-read-post"><a href=#>Подробнее</a></p>
+                <p class="link-read-post"><a href="{{ a.get_absolute_url }}">Подробнее</a></p>
                 <hr>
             </li>
         {% endfor %}
