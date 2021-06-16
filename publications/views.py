@@ -28,6 +28,30 @@ def about(request):
     return render(request, 'publications/about.html', {'menu': menu, 'title': 'О сайте'})
 
 
+def about_authors(request):
+    posts_authors = Author.objects.all()
+
+    context = {
+        'posts_authors': posts_authors,
+        'menu': menu,
+        'title': 'Авторы редакции',
+    }
+
+    return render(request, 'publications/info_about_authors.html', context=context)
+
+
+def about_athlete(request):
+    posts_athlete = Athlete.objects.all()
+
+    context = {
+        'posts_athlete': posts_athlete,
+        'menu': menu,
+        'title': 'Спортсмены',
+    }
+
+    return render(request, 'publications/info_athlete.html', context=context)
+
+
 class CommunicationFormView(DataMixin, FormView):
     form_class = CommunicationWhithCompanyForm
     template_name = 'publications/addpage.html'

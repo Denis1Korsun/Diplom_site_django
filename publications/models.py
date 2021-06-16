@@ -31,6 +31,9 @@ class Author(models.Model):
     def __str__(self):
         return self.first_name + self.last_name
 
+    def get_absolute_url(self):
+        return reverse('article_about_author', kwargs={'author_id': self.pk})
+
 
 class Publications(models.Model):
 
@@ -47,7 +50,6 @@ class Publications(models.Model):
 
     def __str__(self):
         return self.title
-
 
     def get_absolute_url(self):
         return reverse('post', kwargs={'post_slug': self.slug})
@@ -74,6 +76,9 @@ class Athlete(models.Model):
     awards = models.TextField(blank=True, verbose_name='Список наград спортсмена')
     photo = models.ImageField(upload_to="photos_athlete/%Y/%m/%d", verbose_name='Фото спортсмена')
     type_sports = models.ForeignKey(TypesOfSports, on_delete=models.PROTECT)
+
+    def get_absolute_url(self):
+        return reverse('article_about_athlete', kwargs={'athlete_id': self.pk})
 
 
 class InfoAboutJournal(models.Model):
