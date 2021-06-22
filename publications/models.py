@@ -42,9 +42,9 @@ class Publications(models.Model):
     annotations = models.TextField(verbose_name='Краткое описание')
     content = models.TextField(verbose_name='Текст статьи')
     photo = models.ImageField(upload_to="photos_publications/%Y/%m/%d", verbose_name='Фотография')
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    time_update = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
-    is_published = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
+    publiched_at = models.BooleanField(default=True)
     category = models.ForeignKey(RubricPublications, on_delete=models.PROTECT, verbose_name='Категория')
     author = models.ForeignKey(Author, on_delete=models.PROTECT, verbose_name='Автор')
 
