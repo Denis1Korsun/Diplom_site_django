@@ -1,0 +1,58 @@
+version: "3.5"
+
+services:
+  nginx:
+    image: nginx
+    container_name: sport-nginx
+    build:
+      context: ./nginx
+      network: host
+      args:
+        - CERBOT_EMAIL=deskorsun@gmail.com
+        - DOMAIN_LIST=itdk.space
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./media/:/code/media
+      - ./static/:/code/static
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - letsencrypt:/etc/letsencrypt
+    depends_on:
+      - web
+
+
+  web:
+    build: .
+    tty: true
+    container_name: sport-web
+    restart: always
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: "first_sports.settings"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:13
+    container_name: sport-db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: "password"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5500:5432"
+volumes:
+  postgres_data:
+
