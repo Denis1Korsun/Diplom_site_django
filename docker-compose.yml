@@ -3,13 +3,11 @@ version: "3.5"
 services:
   nginx:
     image: nginx
-    container_name: sport-nginx
     build:
-      context: ./nginx
+      context: .
+      dockerfile: Dockerfile-nginx
       network: host
-      args:
-        - CERBOT_EMAIL=deskorsun@gmail.com
-        - DOMAIN_LIST=itdk.space
+    container_name: sport-nginx
     restart: always
     ports:
       - "80:80"
